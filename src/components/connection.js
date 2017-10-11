@@ -57,7 +57,7 @@ class Connection extends React.Component {
 
     //--------------------------------------------------------------------------
 
-    creat() {
+    creat(event) {
         event.preventDefault();
         var body = JSON.stringify(this.state.userCrea);
         console.log("join "+body);
@@ -71,7 +71,7 @@ class Connection extends React.Component {
         .then(rep =>{this.response(rep)});
     }
 
-    connection(){
+    connection(event){
         event.preventDefault();
         var body = JSON.stringify(this.state.userCo);
         console.log("authenticate "+body);
@@ -111,7 +111,7 @@ const ViewConnection = function (props) {
             }
 
             <div id="form" >
-                <form action="" method="post" >
+                <form action="" method="post" onSubmit={ props.creat } >
                     <h1>Création</h1>
                     <label >Nom :</label>
                     <input id="name" type="text" name="name" onInput={ props.updateUserCrea }/>
@@ -122,9 +122,9 @@ const ViewConnection = function (props) {
                     <label>image :</label>
                     <input id="image" type="text" name="image" onInput={ props.updateUserCrea }/>
                     <br/>
-                    <input type="submit" onClick={ props.creat } value="créer compte" />
+                    <input type="submit" value="créer compte" />
                 </form>
-                <form action="" method="post" >
+                <form action="" method="post" onSubmit={ props.connection } >
                     <h1>Conection</h1>
                     <label >Nom :</label>
                     <input id="name" type="text" name="name" onInput={ props.updateUserCo }/>
@@ -132,7 +132,7 @@ const ViewConnection = function (props) {
                     <label>Password :</label>
                     <input id="password" type="password" name="password" onInput={ props.updateUserCo }/>
                     <br/>
-                    <input type="submit" onClick={ props.connection }  value="Connection" />
+                    <input type="submit" value="Connection" />
                 </form>
             </div>
         </div>

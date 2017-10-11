@@ -60,8 +60,10 @@ class Home extends React.Component {
 
     //--------------------------------------------------------------------------
 
-    getMsg() {
-        event.preventDefault();
+    getMsg(event) {
+        if(event != null){
+            event.preventDefault();
+        }
         console.log("/u/timeline ");
         this.setState({error: ""});
         fetch("https://messy.now.sh/u/timeline", {
@@ -72,8 +74,10 @@ class Home extends React.Component {
         .then(rep =>{this.response(rep)});
     }
 
-    sendMsg(){
-        event.preventDefault();
+    sendMsg(event){
+        if(event != null){
+            event.preventDefault();
+        }
         console.log("/u/timeline send");
         this.setState({error: ""});
         var msg = {
@@ -133,11 +137,11 @@ const ViewHome = function (props) {
                 })}
                 </ul>
             </div>
-            <form>
+            <form onSubmit={props.sendMsg}>
                 <label>Msg :</label>
                 <textarea name="msg" rows="1" cols="100" onInput={props.updateUserCrea}>
                 </textarea>
-                <input type="submit" onClick={props.sendMsg} value="send" />
+                <input type="submit" value="send" />
                 <input type="button" onClick={props.getMsg} value="F5" />
 
             </form>
