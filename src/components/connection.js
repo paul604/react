@@ -59,6 +59,7 @@ class Connection extends React.Component {
     //--------------------------------------------------------------------------
 
     creat() {
+        event.preventDefault();
         var body = JSON.stringify(this.state.userCrea);
         console.log("join "+body);
         fetch("https://messy.now.sh/join", {
@@ -72,6 +73,7 @@ class Connection extends React.Component {
     }
 
     connection(){
+        event.preventDefault();
         var body = JSON.stringify(this.state.userCo);
         console.log("authenticate "+body);
         fetch("https://messy.now.sh/authenticate", {
@@ -121,7 +123,7 @@ const ViewConnection = function (props) {
                     <label>image :</label>
                     <input id="image" type="text" name="image" onInput={ props.updateUserCrea }/>
                     <br/>
-                    <input type="button" onClick={ props.creat } value="créer compte" />
+                    <input type="submit" onClick={ props.creat } value="créer compte" />
                 </form>
                 <form action="" method="post" >
                     <h1>Conection</h1>
@@ -131,7 +133,7 @@ const ViewConnection = function (props) {
                     <label>Password :</label>
                     <input id="password" type="password" name="password" onInput={ props.updateUserCo }/>
                     <br/>
-                    <input type="button" onClick={ props.connection }  value="Connection" />
+                    <input type="submit" onClick={ props.connection }  value="Connection" />
                 </form>
             </div>
         </div>
