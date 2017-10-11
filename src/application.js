@@ -9,22 +9,26 @@ class Main extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            log: false,
-            dataLog: null
+
         };
         this.onConection = this.onConection.bind(this);
     }
 
     onConection(dataLog){
-        this.setState({ dataLog: dataLog });
-        this.state.log=true;
+        console.log(dataLog);
+        sessionStorage.setItem("userId", dataLog.user.id);
+        sessionStorage.setItem("token", dataLog.token);
         // this.render();
         this.forceUpdate();
     }
 
     render() {
-        if(this.state.log){
-            return (<Home dataLog={this.state.dataLog}/>);
+        if(sessionStorage.getItem("token") != null){
+            var dataUser = {
+                    userId: sessionStorage.getItem("userId"),
+                    token: sessionStorage.getItem("token")
+            };
+            return (<Home dataUser={dataUser}/>);
         }
         return (<Connection onConection={this.onConection}/>);
     }

@@ -5,6 +5,7 @@ class Home extends React.Component {
 
     constructor(props) {
         super(props);
+            console.log(this.props.dataUser);
         this.state = {
             newMsg: "",
             error: "",
@@ -65,7 +66,7 @@ class Home extends React.Component {
         this.setState({error: ""});
         fetch("https://messy.now.sh/u/timeline", {
             headers: {
-                "Authorization": "Bearer:"+this.props.dataLog.token
+                "Authorization": "Bearer:"+this.props.dataUser.token
             }
         })
         .then(rep =>{this.response(rep)});
@@ -78,13 +79,12 @@ class Home extends React.Component {
             message:this.state.newMsg
         };
         var body = JSON.stringify(msg);
-        console.log(body);
         fetch("https://messy.now.sh/u/timeline", {
             method: "POST",
             body: body,
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": "Bearer:"+this.props.dataLog.token
+                "Authorization": "Bearer:"+this.props.dataUser.token
             }
         })
         .then(rep =>{this.responseSendMsg(rep)});
