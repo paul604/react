@@ -45,7 +45,7 @@ class Connection extends React.Component {
     //--------------------------------------------------------------------------
 
     response(rep){
-        if (rep.status !== 200) {
+        if (!rep.ok) {
           console.log("Problem. Status Code: " +rep.status+"   rep:"+rep.statusText);
           this.setState({errorImg: "https://http.cat/"+rep.status});
           rep.json().then(data => {this.saveErrorMsg(data)});
