@@ -16,8 +16,9 @@ class Home extends React.Component {
         this.getMsg = this.getMsg.bind(this);
         this.sendMsg = this.sendMsg.bind(this);
         this.updateUserCrea = this.updateUserCrea.bind(this);
-        this.responseSendMsg = this.responseSendMsg.bind(this);
+        this.responseSendAndSupMsg = this.responseSendAndSupMsg.bind(this);
         this.saveErrorMsg = this.saveErrorMsg.bind(this);
+        this.supMsg = this.supMsg.bind(this);
 
     }
 
@@ -50,8 +51,8 @@ class Home extends React.Component {
         this.forceUpdate();
     }
 
-    responseSendMsg(rep){
-        if (rep.status !== 200) {
+    responseSendAndSupMsg(rep){
+        if (!rep.ok) {
             console.log("Problem. Status Code: " +rep.status+"   rep:"+rep.statusText);
             this.setState({errorImg: "https://http.cat/"+rep.status});
             rep.json().then(data => {this.saveErrorMsg(data)});
@@ -90,6 +91,9 @@ class Home extends React.Component {
         var msg = {
             message:this.state.newMsg
         };
+        this.setState({
+            newMsg: ""
+        });
         var body = JSON.stringify(msg);
         fetch("https://messy.now.sh/u/timeline", {
             method: "POST",
@@ -99,14 +103,29 @@ class Home extends React.Component {
                 "Authorization": "Bearer:"+this.props.dataUser.token
             }
         })
-        .then(rep =>{this.responseSendMsg(rep)});
+        .then(rep =>{this.responseSendAndSupMsg(rep)});
+    }
+
+    supMsg(event){
+        console.log("/u/timeline sup");
+        var id = event.target.value;
+        console.log(id);
+        fetch("https://messy.now.sh/u/timeline/"+id, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer:"+this.props.dataUser.token
+            }
+        })
+        .then(rep =>{this.responseSendAndSupMsg(rep)});
     }
 
     //--------------------------------------------------------------------------
 
     render() {
-        return (<ViewHome errorImg={this.state.errorImg} errorMsg={this.state.errorMsg} msg={this.state.msg}
-            getMsg={this.getMsg} sendMsg={this.sendMsg} updateUserCrea={this.updateUserCrea}/>);
+        return (<ViewHome errorImg={this.state.errorImg} errorMsg={this.state.errorMsg} newMsg={this.state.newMsg} msg={this.state.msg}
+            getMsg={this.getMsg} sendMsg={this.sendMsg} updateUserCrea={this.updateUserCrea}
+            dataUser={this.props.dataUser} supMsg={this.supMsg}/>);
     }
 
 }
@@ -138,6 +157,10 @@ const ViewHome = function (props) {
                     return (
                         <li>
                             <img src={item.user.image} height="50" width="50"/> {item.user.name}: ({item.date})
+                            {item.user.id === props.dataUser.userId?
+                                 <button type="button" value={item.id} onClick={props.supMsg}>supprimer</button> :
+                                 <span/>
+                            }
                             <ul>
                                 <li>
                                     {item.message}
@@ -150,7 +173,7 @@ const ViewHome = function (props) {
             </div>
             <form onSubmit={props.sendMsg}>
                 <label>Msg :</label>
-                <textarea name="msg" rows="1" cols="100" onInput={props.updateUserCrea}>
+                <textarea name="msg" value={props.newMsg} rows="1" cols="100" onInput={props.updateUserCrea}>
                 </textarea>
                 <input type="submit" value="send" />
                 <input type="button" onClick={props.getMsg} value="F5" />
