@@ -52,7 +52,6 @@ class Connection extends React.Component {
     }
 
     dataJson(data){
-        console.log(data);
         this.props.onConection(data);
     }
 
