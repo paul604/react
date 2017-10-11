@@ -15,6 +15,7 @@ class Home extends React.Component {
         this.getMsg = this.getMsg.bind(this);
         this.sendMsg = this.sendMsg.bind(this);
         this.updateUserCrea = this.updateUserCrea.bind(this);
+        this.responseSendMsg = this.responseSendMsg.bind(this);
 
     }
 
@@ -47,10 +48,21 @@ class Home extends React.Component {
         this.forceUpdate();
     }
 
+    responseSendMsg(rep){
+        if (rep.status !== 200) {
+          console.log("Problem. Status Code: " +rep.status+"   rep:"+rep.statusText);
+          this.setState({error: "https://http.cat/"+rep.status});
+          return;
+      }else{
+        this.getMsg();
+      }
+    }
+
     //--------------------------------------------------------------------------
 
     getMsg() {
         console.log("/u/timeline ");
+        this.setState({error: ""});
         fetch("https://messy.now.sh/u/timeline", {
             headers: {
                 "Authorization": "Bearer:"+this.props.dataLog.token
@@ -61,6 +73,7 @@ class Home extends React.Component {
 
     sendMsg(){
         console.log("/u/timeline send");
+        this.setState({error: ""});
         var msg = {
             message:this.state.newMsg
         };
@@ -74,7 +87,7 @@ class Home extends React.Component {
                 "Authorization": "Bearer:"+this.props.dataLog.token
             }
         })
-        .then(rep =>{this.getMsg()});
+        .then(rep =>{this.responseSendMsg(rep)});
     }
 
     //--------------------------------------------------------------------------
