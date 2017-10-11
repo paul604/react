@@ -6,7 +6,8 @@ class Connection extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            error: "",
+            errorImg: "",
+            errorMsg: "",
             userCrea: {name: "", password: "", image: ""},
             userCo: {name: "", password: ""}
         };
@@ -16,6 +17,7 @@ class Connection extends React.Component {
         this.creat = this.creat.bind(this);
         this.connection = this.connection.bind(this);
         this.dataJson = this.dataJson.bind(this);
+        this.saveErrorMsg = this.saveErrorMsg.bind(this);
     }
 
     //--------------------------------------------------------------------------
@@ -45,7 +47,8 @@ class Connection extends React.Component {
     response(rep){
         if (rep.status !== 200) {
           console.log("Problem. Status Code: " +rep.status+"   rep:"+rep.statusText);
-          this.setState({error: "https://http.cat/"+rep.status});
+          this.setState({errorImg: "https://http.cat/"+rep.status});
+          rep.json().then(data => {this.saveErrorMsg(data)});
           return;
         }
         rep.json().then(dataFun => {this.dataJson(dataFun)});
@@ -55,10 +58,15 @@ class Connection extends React.Component {
         this.props.onConection(data);
     }
 
+    saveErrorMsg(msg){
+        this.setState({errorMsg: msg.error});
+    }
+
     //--------------------------------------------------------------------------
 
     creat(event) {
         event.preventDefault();
+        this.setState({errorImg: ""});
         var body = JSON.stringify(this.state.userCrea);
         console.log("join "+body);
         fetch("https://messy.now.sh/join", {
@@ -73,6 +81,7 @@ class Connection extends React.Component {
 
     connection(event){
         event.preventDefault();
+        this.setState({errorImg: ""});
         var body = JSON.stringify(this.state.userCo);
         console.log("authenticate "+body);
         fetch("https://messy.now.sh/authenticate", {
@@ -88,7 +97,7 @@ class Connection extends React.Component {
     //--------------------------------------------------------------------------
 
     render() {
-        return (<ViewConnection error={this.state.error} updateUserCrea={ this.updateUserCrea }
+        return (<ViewConnection errorImg={this.state.errorImg} errorMsg={this.state.errorMsg} updateUserCrea={ this.updateUserCrea }
             updateUserCo={ this.updateUserCo } creat={this.creat} connection={this.connection}/>);
     }
 
@@ -104,8 +113,11 @@ const ViewConnection = function (props) {
     return (
         <div >
 
-            {props.error != "" ?
-                    <img src={props.error} height="250" width="300"/>
+            {props.errorImg != "" ?
+                    <div>
+                        <img src={props.errorImg} height="250" width="300"/>
+                        <p>{props.errorMsg}</p>
+                    </div>
                     :
                     <div></div>
             }

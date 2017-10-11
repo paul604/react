@@ -7,7 +7,8 @@ class Home extends React.Component {
         super(props);
         this.state = {
             newMsg: "",
-            error: "",
+            errorImg: "",
+            errorMsg: "",
             msg: new Array()
         };
         this.response = this.response.bind(this);
@@ -16,6 +17,7 @@ class Home extends React.Component {
         this.sendMsg = this.sendMsg.bind(this);
         this.updateUserCrea = this.updateUserCrea.bind(this);
         this.responseSendMsg = this.responseSendMsg.bind(this);
+        this.saveErrorMsg = this.saveErrorMsg.bind(this);
 
     }
 
@@ -27,7 +29,6 @@ class Home extends React.Component {
         this.setState({
             newMsg: event.target.value
         });
-        console.log("up");
     }
 
     //--------------------------------------------------------------------------
@@ -35,7 +36,8 @@ class Home extends React.Component {
     response(rep){
         if (rep.status !== 200) {
           console.log("Problem. Status Code: " +rep.status+"   rep:"+rep.statusText);
-          this.setState({error: "https://http.cat/"+rep.status});
+          this.setState({errorImg: "https://http.cat/"+rep.status});
+          rep.json().then(data => {this.saveErrorMsg(data)});
           return;
         }
         rep.json().then(dataFun => {this.dataJson(dataFun)});
@@ -50,12 +52,17 @@ class Home extends React.Component {
 
     responseSendMsg(rep){
         if (rep.status !== 200) {
-          console.log("Problem. Status Code: " +rep.status+"   rep:"+rep.statusText);
-          this.setState({error: "https://http.cat/"+rep.status});
-          return;
-      }else{
-        this.getMsg();
-      }
+            console.log("Problem. Status Code: " +rep.status+"   rep:"+rep.statusText);
+            this.setState({errorImg: "https://http.cat/"+rep.status});
+            rep.json().then(data => {this.saveErrorMsg(data)});
+            return;
+        }else{
+            this.getMsg();
+        }
+    }
+
+    saveErrorMsg(msg){
+        this.setState({errorMsg: msg.error});
     }
 
     //--------------------------------------------------------------------------
@@ -63,9 +70,9 @@ class Home extends React.Component {
     getMsg(event) {
         if(event != null){
             event.preventDefault();
+            this.setState({errorImg: ""});
         }
         console.log("/u/timeline ");
-        this.setState({error: ""});
         fetch("https://messy.now.sh/u/timeline", {
             headers: {
                 "Authorization": "Bearer:"+this.props.dataUser.token
@@ -79,7 +86,7 @@ class Home extends React.Component {
             event.preventDefault();
         }
         console.log("/u/timeline send");
-        this.setState({error: ""});
+        this.setState({errorImg: ""});
         var msg = {
             message:this.state.newMsg
         };
@@ -98,7 +105,8 @@ class Home extends React.Component {
     //--------------------------------------------------------------------------
 
     render() {
-        return (<ViewHome error={this.state.error} msg={this.state.msg} getMsg={this.getMsg} sendMsg={this.sendMsg} updateUserCrea={this.updateUserCrea}/>);
+        return (<ViewHome errorImg={this.state.errorImg} errorMsg={this.state.errorMsg} msg={this.state.msg}
+            getMsg={this.getMsg} sendMsg={this.sendMsg} updateUserCrea={this.updateUserCrea}/>);
     }
 
 }
@@ -112,8 +120,11 @@ module.exports = Home;
 const ViewHome = function (props) {
     return (
         <div>
-            {props.error != "" ?
-                    <img src={props.error} height="250" width="300"/>
+            {props.errorImg != "" ?
+                    <div>
+                        <img src={props.errorImg} height="250" width="300"/>
+                        <p>{props.errorMsg}</p>
+                    </div>
                     :
                     <div></div>
             }
