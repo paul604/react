@@ -15,3 +15,6 @@ Les sources du jeu sont écrite en utilisant une syntaxe ES6, pour être complé
 Pour ne pas avoir à faire ça à chaque fois que vous faites une modification sur votre IA, pour pouvez lancer la commande :   
     `npm run watch`
 qui compilera automatiquement les sources dès qu'il y a un changement dessus.
+
+
+https://giphy.com/gifs/loading-icon-cMU9cCdDHTHJm/

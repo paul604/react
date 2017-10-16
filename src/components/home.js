@@ -35,6 +35,7 @@ class Home extends React.Component {
     //--------------------------------------------------------------------------
 
     response(rep){
+        this.setState({errorImg: ""});
         if (!rep.ok) {
           console.log("Problem. Status Code: " +rep.status+"   rep:"+rep.statusText);
           this.setState({errorImg: "https://http.cat/"+rep.status});
@@ -71,8 +72,8 @@ class Home extends React.Component {
     getMsg(event) {
         if(event != null){
             event.preventDefault();
-            this.setState({errorImg: ""});
         }
+        this.setState({errorImg: "https://media.giphy.com/media/cMU9cCdDHTHJm/giphy.gif"});
         console.log("/u/timeline ");
         fetch("https://messy.now.sh/u/timeline", {
             headers: {
@@ -87,7 +88,7 @@ class Home extends React.Component {
             event.preventDefault();
         }
         console.log("/u/timeline send");
-        this.setState({errorImg: ""});
+        this.setState({errorImg: "https://media.giphy.com/media/cMU9cCdDHTHJm/giphy.gif"});
         var msg = {
             message:this.state.newMsg
         };

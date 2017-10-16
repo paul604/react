@@ -48,6 +48,7 @@ class RequeteConnection extends React.Component {
     //--------------------------------------------------------------------------
 
     response(rep){
+        this.setState({errorImg: ""});
         if (!rep.ok) {
           console.log("Problem. Status Code: " +rep.status+"   rep:"+rep.statusText);
           this.setState({errorImg: "https://http.cat/"+rep.status});
@@ -69,7 +70,7 @@ class RequeteConnection extends React.Component {
 
     creat(event) {
         event.preventDefault();
-        this.setState({errorImg: ""});
+        this.setState({errorImg: "https://media.giphy.com/media/cMU9cCdDHTHJm/giphy.gif"});
         var body = JSON.stringify(this.state.userCrea);
         console.log("join "+body);
         fetch("https://messy.now.sh/join", {
@@ -84,7 +85,7 @@ class RequeteConnection extends React.Component {
 
     connection(event){
         event.preventDefault();
-        this.setState({errorImg: ""});
+        this.setState({errorImg: "https://media.giphy.com/media/cMU9cCdDHTHJm/giphy.gif"});
         var body = JSON.stringify(this.state.userCo);
         console.log("authenticate "+body);
         fetch("https://messy.now.sh/authenticate", {
