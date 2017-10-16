@@ -155,7 +155,7 @@ const ViewHome = function (props) {
                 <ul id="msg_ul">
                 {props.msg.map(function(item, index){
                     return (
-                        <li>
+                        <li key={index}>
                             <img src={item.user.image} height="50" width="50"/> {item.user.name}: ({item.date})
                             {item.user.id === props.dataUser.userId?
                                  <button type="button" value={item.id} onClick={props.supMsg}>supprimer</button> :
