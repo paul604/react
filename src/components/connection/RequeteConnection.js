@@ -1,7 +1,9 @@
 var React = require("react");
 var ReactDOM = require("react-dom");
 
-class Connection extends React.Component {
+var VueConnection = require("./VueConnection.js");
+
+class RequeteConnection extends React.Component {
 
     constructor(props) {
         super(props);
@@ -41,6 +43,7 @@ class Connection extends React.Component {
             userCo: updatedU
         });
     }
+
 
     //--------------------------------------------------------------------------
 
@@ -97,56 +100,10 @@ class Connection extends React.Component {
     //--------------------------------------------------------------------------
 
     render() {
-        return (<ViewConnection errorImg={this.state.errorImg} errorMsg={this.state.errorMsg} updateUserCrea={ this.updateUserCrea }
+        return (<VueConnection errorImg={this.state.errorImg} errorMsg={this.state.errorMsg} updateUserCrea={ this.updateUserCrea }
             updateUserCo={ this.updateUserCo } creat={this.creat} connection={this.connection}/>);
     }
 
 }
 
-module.exports = Connection;
-
-    //--------------------------------------------------------------------------
-    //
-    //--------------------------------------------------------------------------
-
-const ViewConnection = function (props) {
-    return (
-        <div >
-
-            {props.errorImg != "" ?
-                    <div>
-                        <img src={props.errorImg} height="250" width="300"/>
-                        <p>{props.errorMsg}</p>
-                    </div>
-                    :
-                    <div></div>
-            }
-
-            <div id="form" >
-                <form action="" method="post" onSubmit={ props.creat } >
-                    <h1>Création</h1>
-                    <label >Nom :</label>
-                    <input id="name" type="text" name="name" onInput={ props.updateUserCrea }/>
-                    <br/>
-                    <label>Password :</label>
-                    <input id="password" type="password" name="password" onInput={ props.updateUserCrea }/>
-                    <br/>
-                    <label>image :</label>
-                    <input id="image" type="text" name="image" onInput={ props.updateUserCrea }/>
-                    <br/>
-                    <input type="submit" value="créer compte" />
-                </form>
-                <form action="" method="post" onSubmit={ props.connection } >
-                    <h1>Conection</h1>
-                    <label >Nom :</label>
-                    <input id="name" type="text" name="name" onInput={ props.updateUserCo }/>
-                    <br/>
-                    <label>Password :</label>
-                    <input id="password" type="password" name="password" onInput={ props.updateUserCo }/>
-                    <br/>
-                    <input type="submit" value="Connection" />
-                </form>
-            </div>
-        </div>
-    );
-}
+module.exports = RequeteConnection;
