@@ -108,6 +108,7 @@ class Home extends React.Component {
     }
 
     supMsg(event){
+        this.setState({errorImg: "https://media.giphy.com/media/cMU9cCdDHTHJm/giphy.gif"});
         console.log("/u/timeline sup");
         var id = event.target.value;
         console.log(id);
