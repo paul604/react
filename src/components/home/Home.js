@@ -11,6 +11,7 @@ class Home extends React.Component {
             newMsg: "",
             errorImg: "",
             errorMsg: "",
+            loadImg: "",
             msg: new Array()
         };
         this.response = this.response.bind(this);
@@ -37,7 +38,7 @@ class Home extends React.Component {
     //--------------------------------------------------------------------------
 
     response(rep){
-        this.setState({errorImg: ""});
+        this.setState({loadImg: ""});
         if (!rep.ok) {
           console.log("Problem. Status Code: " +rep.status+"   rep:"+rep.statusText);
           this.setState({errorImg: "https://http.cat/"+rep.status});
@@ -55,6 +56,7 @@ class Home extends React.Component {
     }
 
     responseSendAndSupMsg(rep){
+        this.setState({loadImg: ""});
         if (!rep.ok) {
             console.log("Problem. Status Code: " +rep.status+"   rep:"+rep.statusText);
             this.setState({errorImg: "https://http.cat/"+rep.status});
@@ -75,7 +77,8 @@ class Home extends React.Component {
         if(event != null){
             event.preventDefault();
         }
-        this.setState({errorImg: "https://media.giphy.com/media/cMU9cCdDHTHJm/giphy.gif"});
+        this.setState({errorImg: ""});
+        this.setState({loadImg: "https://media.giphy.com/media/cMU9cCdDHTHJm/giphy.gif"});
         console.log("/u/timeline ");
         fetch("https://messy.now.sh/u/timeline", {
             headers: {
@@ -89,8 +92,9 @@ class Home extends React.Component {
         if(event != null){
             event.preventDefault();
         }
+        this.setState({errorImg: ""});
+        this.setState({loadImg: "https://media.giphy.com/media/cMU9cCdDHTHJm/giphy.gif"});
         console.log("/u/timeline send");
-        this.setState({errorImg: "https://media.giphy.com/media/cMU9cCdDHTHJm/giphy.gif"});
         var msg = {
             message:this.state.newMsg
         };
@@ -110,7 +114,8 @@ class Home extends React.Component {
     }
 
     supMsg(event){
-        this.setState({errorImg: "https://media.giphy.com/media/cMU9cCdDHTHJm/giphy.gif"});
+        this.setState({errorImg: ""});
+        this.setState({loadImg: "https://media.giphy.com/media/cMU9cCdDHTHJm/giphy.gif"});
         console.log("/u/timeline sup");
         var id = event.target.value;
         console.log(id);
@@ -129,7 +134,7 @@ class Home extends React.Component {
     render() {
         return (<VueHome errorImg={this.state.errorImg} errorMsg={this.state.errorMsg} newMsg={this.state.newMsg} msg={this.state.msg}
             getMsg={this.getMsg} sendMsg={this.sendMsg} updateUserCrea={this.updateUserCrea}
-            dataUser={this.props.dataUser} supMsg={this.supMsg}/>);
+            dataUser={this.props.dataUser} supMsg={this.supMsg} loadImg={this.state.loadImg}/>);
     }
 
 }

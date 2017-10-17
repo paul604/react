@@ -10,6 +10,7 @@ class RequeteConnection extends React.Component {
         this.state = {
             errorImg: "",
             errorMsg: "",
+            loadImg: "",
             userCrea: {name: "", password: "", image: ""},
             userCo: {name: "", password: ""}
         };
@@ -48,7 +49,7 @@ class RequeteConnection extends React.Component {
     //--------------------------------------------------------------------------
 
     response(rep){
-        this.setState({errorImg: ""});
+        this.setState({loadImg: ""});
         if (!rep.ok) {
           console.log("Problem. Status Code: " +rep.status+"   rep:"+rep.statusText);
           this.setState({errorImg: "https://http.cat/"+rep.status});
@@ -70,7 +71,8 @@ class RequeteConnection extends React.Component {
 
     creat(event) {
         event.preventDefault();
-        this.setState({errorImg: "https://media.giphy.com/media/cMU9cCdDHTHJm/giphy.gif"});
+        this.setState({errorImg: ""});
+        this.setState({loadImg: "https://media.giphy.com/media/cMU9cCdDHTHJm/giphy.gif"});
         var body = JSON.stringify(this.state.userCrea);
         console.log("join "+body);
         fetch("https://messy.now.sh/join", {
@@ -85,7 +87,8 @@ class RequeteConnection extends React.Component {
 
     connection(event){
         event.preventDefault();
-        this.setState({errorImg: "https://media.giphy.com/media/cMU9cCdDHTHJm/giphy.gif"});
+        this.setState({errorImg: ""});
+        this.setState({loadImg: "https://media.giphy.com/media/cMU9cCdDHTHJm/giphy.gif"});
         var body = JSON.stringify(this.state.userCo);
         console.log("authenticate "+body);
         fetch("https://messy.now.sh/authenticate", {
@@ -102,7 +105,7 @@ class RequeteConnection extends React.Component {
 
     render() {
         return (<VueConnection errorImg={this.state.errorImg} errorMsg={this.state.errorMsg} updateUserCrea={ this.updateUserCrea }
-            updateUserCo={ this.updateUserCo } creat={this.creat} connection={this.connection}/>);
+            updateUserCo={ this.updateUserCo } creat={this.creat} connection={this.connection} loadImg={this.state.loadImg}/>);
     }
 
 }

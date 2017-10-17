@@ -18,6 +18,13 @@ class VueConnection extends React.Component {
                         :
                         <div></div>
                 }
+                {this.props.loadImg != "" ?
+                    <div>
+                        <img src={this.props.loadImg}/>
+                    </div>
+                    :
+                    <div></div>
+                }
 
                 <div id="form" >
                     <form action="" method="post" onSubmit={ this.props.creat } >
