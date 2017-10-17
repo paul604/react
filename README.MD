@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/paul604/react.svg?branch=master)](https://travis-ci.org/paul604/react)
+
 Sujet réer par [atomrc](https://github.com/atomrc).
 ## Connection
 ![log](./resources/img/log.png)
