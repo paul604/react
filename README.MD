@@ -5,6 +5,9 @@ Sujet réer par [atomrc](https://github.com/atomrc).
 ## Home
 ![home](./resources/img/home.png)
 
+## loading
+src : [https://giphy.com/gifs/loading-icon-cMU9cCdDHTHJm/](https://giphy.com/gifs/loading-icon-cMU9cCdDHTHJm/)
+![loading gif](https://media.giphy.com/media/cMU9cCdDHTHJm/giphy.gif)
 
 ### Installation
 
@@ -23,5 +26,12 @@ Pour ne pas avoir à faire ça à chaque fois que vous faites une modification s
     `npm run watch`
 qui compilera automatiquement les sources dès qu'il y a un changement dessus.
 
+# Licence
 
-https://giphy.com/gifs/loading-icon-cMU9cCdDHTHJm/
+## FR
+[![Licence Creative Commons](https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png)](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.fr)  
+Mis à disposition selon les termes de la [licence Creative Commons Attribution - Pas d’Utilisation Commerciale - Partage dans les Mêmes Conditions 4.0 International](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.fr).
+
+## EN
+[![Licence Creative Commons](https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png)](http://creativecommons.org/licenses/by-nc-sa/4.0/)  
+This is licensed under a [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-nc-sa/4.0/).
