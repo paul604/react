@@ -2,7 +2,7 @@ var React = require("react");
 var ReactDOM = require("react-dom");
 
 var Connection = require("./components/connection/RequeteConnection.js");
-var Home = require("./components/home.js");
+var Home = require("./components/home/Home.js");
 
 class Main extends React.Component {
 

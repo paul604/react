@@ -1,6 +1,8 @@
 var React = require("react");
 var ReactDOM = require("react-dom");
 
+var VueHome = require("./VueHome.js");
+
 class Home extends React.Component {
 
     constructor(props) {
@@ -125,7 +127,7 @@ class Home extends React.Component {
     //--------------------------------------------------------------------------
 
     render() {
-        return (<ViewHome errorImg={this.state.errorImg} errorMsg={this.state.errorMsg} newMsg={this.state.newMsg} msg={this.state.msg}
+        return (<VueHome errorImg={this.state.errorImg} errorMsg={this.state.errorMsg} newMsg={this.state.newMsg} msg={this.state.msg}
             getMsg={this.getMsg} sendMsg={this.sendMsg} updateUserCrea={this.updateUserCrea}
             dataUser={this.props.dataUser} supMsg={this.supMsg}/>);
     }
@@ -133,55 +135,3 @@ class Home extends React.Component {
 }
 
 module.exports = Home;
-
-    //--------------------------------------------------------------------------
-    //
-    //--------------------------------------------------------------------------
-
-const ViewHome = function (props) {
-    return (
-        <div>
-            {props.errorImg != "" ?
-                    <div>
-                        <img src={props.errorImg} height="250" width="300"/>
-                        <p>{props.errorMsg}</p>
-                    </div>
-                    :
-                    <div></div>
-            }
-
-            <h1>
-                home
-            </h1>
-            <div id="msg">
-                <ul id="msg_ul">
-                {props.msg.map(function(item, index){
-                    return (
-                        <li key={index}>
-                            <img src={item.user.image} height="50" width="50"/> {item.user.name}: ({item.date})
-                            {item.user.id === props.dataUser.userId?
-                                 <button type="button" value={item.id} onClick={props.supMsg}>supprimer</button> :
-                                 <span/>
-                            }
-                            <ul>
-                                <li>
-                                    {item.message}
-                                </li>
-                            </ul>
-                        </li>
-                    );
-                })}
-                </ul>
-            </div>
-            <form onSubmit={props.sendMsg}>
-                <label>Msg :</label>
-                <textarea name="msg" value={props.newMsg} rows="1" cols="100" onInput={props.updateUserCrea}>
-                </textarea>
-                <input type="submit" value="send" />
-                <input type="button" onClick={props.getMsg} value="F5" />
-
-            </form>
-        </div>
-
-    );
-}
