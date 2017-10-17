@@ -29,6 +29,7 @@ class VueConnection extends React.Component {
                 <div id="form" >
                     <form action="" method="post" onSubmit={ this.props.creat } >
                         <h1>Création</h1>
+                        <hr/>
                         <label >Nom :</label>
                         <input id="name" type="text" name="name" onInput={ this.props.updateUserCrea }/>
                         <br/>
@@ -42,6 +43,7 @@ class VueConnection extends React.Component {
                     </form>
                     <form action="" method="post" onSubmit={ this.props.connection } >
                         <h1>Conection</h1>
+                        <hr/>
                         <label >Nom :</label>
                         <input id="name" type="text" name="name" onInput={ this.props.updateUserCo }/>
                         <br/>

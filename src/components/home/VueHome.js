@@ -30,22 +30,23 @@ class VueHome extends React.Component {
                         </div>
                         :
                         <ul id="msg_ul">
-                        {this.props.msg.map(function(item, index){
-                            return (
-                                <li key={index}>
-                                    <img src={item.user.image} height="50" width="50"/> {item.user.name}: ({item.date})
-                                    {item.user.id === this.props.dataUser.userId?
-                                         <button type="button" value={item.id} onClick={this.props.supMsg}>supprimer</button> :
-                                         <span/>
-                                    }
-                                    <ul>
-                                        <li>
-                                            {item.message}
-                                        </li>
-                                    </ul>
-                                </li>
-                            );
-                        }.bind(this))}
+                            {this.props.msg.map(function(item, index){
+                                return (
+                                    <li key={index}>
+                                        <img src={item.user.image} height="50" width="50"/> {item.user.name}: ({item.date})
+                                        {item.user.id === this.props.dataUser.userId?
+                                             <button type="button" value={item.id} onClick={this.props.supMsg}>supprimer</button> :
+                                             <span/>
+                                        }
+                                        <ul>
+                                            <li>
+                                                {item.message}
+                                            </li>
+                                        </ul>
+                                        <hr/>
+                                    </li>
+                                );
+                            }.bind(this))}
                         </ul>
                     }
                 </div>
