@@ -54,7 +54,17 @@ class Home extends React.Component {
     }
 
     dataJson(data){
-        data.sort();
+        data.sort(function (a, b) {
+            var dateA = a.date;
+            var dateB = b.date;
+            if (dateA < dateB) {
+              return -1;
+            }
+            if (dateA > dateB) {
+              return 1;
+            }
+            return 0;
+        });
         console.log(data);
         this.setState({msg: data});
         this.forceUpdate();

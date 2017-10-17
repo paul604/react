@@ -22,7 +22,7 @@
 
 #msg_ul{
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     justify-content: center;
     padding-left: 0px;
     margin: auto;
