@@ -1,6 +1,12 @@
 var React = require("react");
 var ReactDOM = require("react-dom");
 
+/**
+ * VueHome - la vue de Home
+ *
+ * @param  {Object} props
+ * @return {Object}
+ */
 const VueHome = function (props){
     return (
         <div>

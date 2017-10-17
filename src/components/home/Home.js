@@ -5,6 +5,11 @@ var VueHome = require("./VueHome.js");
 
 class Home extends React.Component {
 
+    /**
+     * constructor - Home
+     *
+     * @constructor
+     */
     constructor(props) {
         super(props);
         this.state = {
@@ -26,22 +31,46 @@ class Home extends React.Component {
 
     }
 
+    /**
+     * componentDidMount
+     *
+     * @return {Void}
+     */
     componentDidMount(){
         this.getMsg();
     }
 
+    /**
+     * updateUserCrea - up state après une modification du champ text.
+     *
+     * @param  {Object} event - event onInput
+     * @return {Void}
+     */
     updateUserCrea(event) {
         this.setState({
             newMsg: event.target.value
         });
     }
 
+    /**
+     * deconection - informe application de la deconection
+     *
+     * @return {Void}
+     */
     deconection(){
         this.props.onDeconection();
     }
 
     //--------------------------------------------------------------------------
+    //                              response
+    //--------------------------------------------------------------------------
 
+    /**
+     * response - gestion de la reponse de getMsg
+     *
+     * @param  {Object} rep - la reponse du fetch
+     * @return {Void}
+     */
     response(rep){
         this.setState({loadImg: ""});
         if (!rep.ok) {
@@ -53,7 +82,21 @@ class Home extends React.Component {
         rep.json().then(dataFun => {this.dataJson(dataFun)});
     }
 
+    /**
+     * dataJson -
+     *
+     * @param {Object[]} data - la reponse du .json() (le tableau des msg)
+     * @param {string} data[].date - la date
+     * @param {string} data[].id - l'ID du msg
+     * @param {string} data[].message - le message
+     * @param {Object} data[].user - l'utilisateur
+     * @param {string} data[].user.id - l'ID de l'utilisateur
+     * @param {string} data[].user.image - l'imgage de l'utilisateur
+     * @param {string} data[].user.name - le nom de l'utilisateur
+     * @return {Void}
+     */
     dataJson(data){
+        //trie data en fonction des date
         data.sort(function (a, b) {
             var dateA = a.date;
             var dateB = b.date;
@@ -70,6 +113,12 @@ class Home extends React.Component {
         this.forceUpdate();
     }
 
+    /**
+     * responseSendAndSupMsg - gestion de la reponse de sendMsg et supMsg
+     *
+     * @param {Object} rep - la reponse du fetch
+     * @return {Void}
+     */
     responseSendAndSupMsg(rep){
         this.setState({loadImg: ""});
         if (!rep.ok) {
@@ -82,12 +131,26 @@ class Home extends React.Component {
         }
     }
 
+    /**
+     * saveErrorMsg - save le msg d'error
+     *
+     * @param  {type} msg
+     * @return {Void}
+     */
     saveErrorMsg(msg){
         this.setState({errorMsg: msg.error});
     }
 
     //--------------------------------------------------------------------------
+    //                              fetch
+    //--------------------------------------------------------------------------
 
+    /**
+     * getMsg - envoie la requête pour get message
+     *
+     * @param  {Object} event
+     * @return {Void}
+     */
     getMsg(event) {
         if(event != null){
             event.preventDefault();
@@ -103,6 +166,12 @@ class Home extends React.Component {
         .then(rep =>{this.response(rep)});
     }
 
+    /**
+     * sendMsg - envoie la requête pour envoyer un message
+     *
+     * @param  {Object} event
+     * @return {Void}
+     */
     sendMsg(event){
         if(event != null){
             event.preventDefault();
@@ -133,6 +202,12 @@ class Home extends React.Component {
         .then(rep =>{this.responseSendAndSupMsg(rep)});
     }
 
+    /**
+     * supMsg - envoie la requête pour supprimer un message
+     *
+     * @param  {Object} event
+     * @return {Void}
+     */
     supMsg(event){
         this.setState({errorImg: ""});
         this.setState({loadImg: "https://media.giphy.com/media/cMU9cCdDHTHJm/giphy.gif"});
@@ -149,8 +224,15 @@ class Home extends React.Component {
         .then(rep =>{this.responseSendAndSupMsg(rep)});
     }
 
+    //--------------------------------------------------------------------------.
+    //                              render
     //--------------------------------------------------------------------------
 
+    /**
+     * render - description
+     *
+     * @return {React.Component}
+     */
     render() {
         return (<VueHome errorImg={this.state.errorImg} errorMsg={this.state.errorMsg} newMsg={this.state.newMsg} msg={this.state.msg}
             getMsg={this.getMsg} sendMsg={this.sendMsg} updateUserCrea={this.updateUserCrea}

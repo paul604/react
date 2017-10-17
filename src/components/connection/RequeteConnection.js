@@ -5,6 +5,11 @@ var VueConnection = require("./VueConnection.js");
 
 class RequeteConnection extends React.Component {
 
+    /**
+     * constructor - RequeteConnection
+     *
+     * @constructor
+     */
     constructor(props) {
         super(props);
         this.state = {
@@ -24,7 +29,15 @@ class RequeteConnection extends React.Component {
     }
 
     //--------------------------------------------------------------------------
+    //                              UP
+    //--------------------------------------------------------------------------
 
+    /**
+     * updateUserCrea - actualise les valeurs de la création de l'utilisateur
+     *
+     * @param  {Object} event - event onInput
+     * @return {Void}
+     */
     updateUserCrea(event) {
         var updatedU = Object.assign({},
             this.state.userCrea,
@@ -35,6 +48,12 @@ class RequeteConnection extends React.Component {
         });
     }
 
+    /**
+     * updateUserCo - actualise les valeurs de la conection de l'utilisateur
+     *
+     * @param  {Object} event - event onInput
+     * @return {Void}
+     */
     updateUserCo(event) {
         var updatedU = Object.assign({},
             this.state.userCo,
@@ -47,7 +66,15 @@ class RequeteConnection extends React.Component {
 
 
     //--------------------------------------------------------------------------
+    //                              response
+    //--------------------------------------------------------------------------
 
+    /**
+     * response - gestion la reponse
+     *
+     * @param  {Object} rep - la response de creat et connection
+     * @return {Void}
+     */
     response(rep){
         this.setState({loadImg: ""});
         if (!rep.ok) {
@@ -59,16 +86,37 @@ class RequeteConnection extends React.Component {
         rep.json().then(dataFun => {this.dataJson(dataFun)});
     }
 
+    /**
+     * dataJson - get data parsing
+     * utilise la méthode onConection de application
+     *
+     * @param  {Object} data - data parsing
+     * @return {Void}
+     */
     dataJson(data){
         this.props.onConection(data);
     }
 
+    /**
+     * saveErrorMsg - save le msg d'error
+     *
+     * @param  {type} msg
+     * @return {Void}
+     */
     saveErrorMsg(msg){
         this.setState({errorMsg: msg.error});
     }
 
     //--------------------------------------------------------------------------
+    //                              fetch
+    //--------------------------------------------------------------------------
 
+    /**
+     * creat - envoie la requête de création de compte.
+     *
+     * @param  {Object} event
+     * @return {Void}
+     */
     creat(event) {
         event.preventDefault();
         this.setState({errorImg: ""});
@@ -85,6 +133,12 @@ class RequeteConnection extends React.Component {
         .then(rep =>{this.response(rep)});
     }
 
+    /**
+     * connection -  envoie la requête de connection.
+     *
+     * @param  {Object} event
+     * @return {Void}
+     */
     connection(event){
         event.preventDefault();
         this.setState({errorImg: ""});
@@ -101,8 +155,15 @@ class RequeteConnection extends React.Component {
         .then(rep =>{this.response(rep)});
     }
 
+    //--------------------------------------------------------------------------.
+    //                              render
     //--------------------------------------------------------------------------
 
+    /**
+     * render - description
+     *
+     * @return {React.Component}
+     */
     render() {
         return (<VueConnection errorImg={this.state.errorImg} errorMsg={this.state.errorMsg} updateUserCrea={ this.updateUserCrea }
             updateUserCo={ this.updateUserCo } creat={this.creat} connection={this.connection} loadImg={this.state.loadImg}/>);

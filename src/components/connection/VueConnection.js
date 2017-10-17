@@ -1,6 +1,12 @@
 var React = require("react");
 var ReactDOM = require("react-dom");
 
+/**
+ * VueConnection - la vue de Connection
+ *
+ * @param  {Object} props
+ * @return {Object}
+ */
 const VueConnection = function (props){
     return (
         <div >
