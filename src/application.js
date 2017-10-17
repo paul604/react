@@ -12,6 +12,7 @@ class Main extends React.Component {
 
         };
         this.onConection = this.onConection.bind(this);
+        this.onDeconection = this.onDeconection.bind(this);
     }
 
     onConection(dataLog){
@@ -22,13 +23,18 @@ class Main extends React.Component {
         this.forceUpdate();
     }
 
+    onDeconection(){
+        sessionStorage.clear();
+        this.forceUpdate();
+    }
+
     render() {
         if(sessionStorage.getItem("token") != null){
             var dataUser = {
                     userId: sessionStorage.getItem("userId"),
                     token: sessionStorage.getItem("token")
             };
-            return (<Home dataUser={dataUser}/>);
+            return (<Home dataUser={dataUser} onDeconection={this.onDeconection}/>);
         }
         return (<Connection onConection={this.onConection}/>);
     }

@@ -22,6 +22,7 @@ class Home extends React.Component {
         this.responseSendAndSupMsg = this.responseSendAndSupMsg.bind(this);
         this.saveErrorMsg = this.saveErrorMsg.bind(this);
         this.supMsg = this.supMsg.bind(this);
+        this.deconection = this.deconection.bind(this);
 
     }
 
@@ -33,6 +34,10 @@ class Home extends React.Component {
         this.setState({
             newMsg: event.target.value
         });
+    }
+
+    deconection(){
+        this.props.onDeconection();
     }
 
     //--------------------------------------------------------------------------
@@ -139,7 +144,8 @@ class Home extends React.Component {
     render() {
         return (<VueHome errorImg={this.state.errorImg} errorMsg={this.state.errorMsg} newMsg={this.state.newMsg} msg={this.state.msg}
             getMsg={this.getMsg} sendMsg={this.sendMsg} updateUserCrea={this.updateUserCrea}
-            dataUser={this.props.dataUser} supMsg={this.supMsg} loadImg={this.state.loadImg}/>);
+            dataUser={this.props.dataUser} supMsg={this.supMsg} loadImg={this.state.loadImg}
+            deconection={this.deconection}/>);
     }
 
 }

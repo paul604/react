@@ -60,6 +60,7 @@ class VueHome extends React.Component {
                         <input type="submit" value="send"/>
                     }
                     <input type="button" onClick={this.props.getMsg} value="F5" />
+                    <input type="button" onClick={this.props.deconection} value="déconection" />
 
                 </form>
             </div>
