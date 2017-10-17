@@ -51,9 +51,13 @@ class VueHome extends React.Component {
                 </div>
                 <form onSubmit={this.props.sendMsg}>
                     <label>Msg :</label>
-                    <textarea name="msg" value={this.props.newMsg} rows="1" cols="100" onInput={this.props.updateUserCrea}>
+                    <textarea name="msg" value={this.props.newMsg} rows="1" cols="100" onInput={this.props.updateUserCrea} >
                     </textarea>
-                    <input type="submit" value="send" />
+                    {this.props.newMsg === ""?
+                        <input type="submit" value="send" disabled/>
+                        :
+                        <input type="submit" value="send"/>
+                    }
                     <input type="button" onClick={this.props.getMsg} value="F5" />
 
                 </form>

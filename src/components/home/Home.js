@@ -92,6 +92,11 @@ class Home extends React.Component {
         if(event != null){
             event.preventDefault();
         }
+        if(this.state.newMsg === ""){
+            this.setState({errorImg: "https://images.duckduckgo.com/iu/?u=http%3A%2F%2F31.media.tumblr.com%2Ftumblr_m9w2is2dVU1qh66wqo1_1280.jpg&f=1"});
+            this.setState({errorMsg: "msg vide"});
+            return;
+        }
         this.setState({errorImg: ""});
         this.setState({loadImg: "https://media.giphy.com/media/cMU9cCdDHTHJm/giphy.gif"});
         console.log("/u/timeline send");
