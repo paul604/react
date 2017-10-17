@@ -34,7 +34,6 @@ class Main extends React.Component {
      * @return {Void}
      */
     onConection(dataLog){
-        console.log("tttt ");
         console.log(dataLog);
         sessionStorage.setItem("userId", dataLog.user.id);
         sessionStorage.setItem("token", dataLog.token);

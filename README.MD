@@ -1,7 +1,14 @@
 Sujet réer par [atomrc](https://github.com/atomrc).
-⚠ nécessite Node.js
+## Conection
+![log](./resources/img/log.png)
+
+## Home
+![home](./resources/img/home.png)
+
 
 ### Installation
+
+:warning: nécessite Node.js
 
 Vous aurez besoin de quelques outils avant de pouvoir commencer à coder. Pour les installer, jouer simplement :  
     `npm install`
