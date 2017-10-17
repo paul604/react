@@ -39,7 +39,7 @@ class VueHome extends React.Component {
                                 </ul>
                             </li>
                         );
-                    })}
+                    }.bind(this))}
                     </ul>
                 </div>
                 <form onSubmit={this.props.sendMsg}>
