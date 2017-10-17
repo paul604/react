@@ -1,5 +1,5 @@
 Sujet réer par [atomrc](https://github.com/atomrc).
-## Conection
+## Connection
 ![log](./resources/img/log.png)
 
 ## Home

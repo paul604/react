@@ -42,7 +42,7 @@ const VueConnection = function (props){
                     <input type="submit" value="créer compte" />
                 </form>
                 <form action="" method="post" onSubmit={ props.connection } >
-                    <h1>Conection</h1>
+                    <h1>Connection</h1>
                     <hr/>
                     <label >Nom :</label>
                     <input id="name" type="text" name="name" onInput={ props.updateUserCo }/>
