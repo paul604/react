@@ -90,6 +90,7 @@ class RequeteConnection extends React.Component {
             load: false
         });
         if (!rep.ok) {
+            //error
             console.log("Problem. Status Code: " + rep.status + "   rep:" + rep.statusText);
             this.setState({
                 errorImg: this.props.errorImgBase + rep.status,
