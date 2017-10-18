@@ -7,7 +7,7 @@ var ReactDOM = require("react-dom");
  * @param  {Object} props
  * @return {Object}
  */
-const VueConnection = function (props){
+const VueConnection = function (props) {
     return (
         <div >
             {props.errorImg != "" ?

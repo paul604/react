@@ -36,7 +36,7 @@ class Home extends React.Component {
      *
      * @return {Void}
      */
-    componentDidMount(){
+    componentDidMount() {
         this.getMsg();
     }
 
@@ -57,7 +57,7 @@ class Home extends React.Component {
      *
      * @return {Void}
      */
-    deconection(){
+    deconection() {
         this.props.onDeconection();
     }
 
@@ -71,15 +71,23 @@ class Home extends React.Component {
      * @param  {Object} rep - la reponse du fetch
      * @return {Void}
      */
-    response(rep){
-        this.setState({loadImg: ""});
+    response(rep) {
+        this.setState({
+            loadImg: ""
+        });
         if (!rep.ok) {
-          console.log("Problem. Status Code: " +rep.status+"   rep:"+rep.statusText);
-          this.setState({errorImg: "https://http.cat/"+rep.status});
-          rep.json().then(data => {this.saveErrorMsg(data)});
-          return;
+            console.log("Problem. Status Code: " + rep.status + "   rep:" + rep.statusText);
+            this.setState({
+                errorImg: "https://http.cat/" + rep.status
+            });
+            rep.json().then(data => {
+                this.saveErrorMsg(data)
+            });
+            return;
         }
-        rep.json().then(dataFun => {this.dataJson(dataFun)});
+        rep.json().then(dataFun => {
+            this.dataJson(dataFun)
+        });
     }
 
     /**
@@ -95,21 +103,23 @@ class Home extends React.Component {
      * @param {string} data[].user.name - le nom de l'utilisateur
      * @return {Void}
      */
-    dataJson(data){
+    dataJson(data) {
         //trie data en fonction des date
         data.sort(function (a, b) {
             var dateA = a.date;
             var dateB = b.date;
             if (dateA < dateB) {
-              return -1;
+                return -1;
             }
             if (dateA > dateB) {
-              return 1;
+                return 1;
             }
             return 0;
         });
         console.log(data);
-        this.setState({msg: data});
+        this.setState({
+            msg: data
+        });
         this.forceUpdate();
     }
 
@@ -119,14 +129,20 @@ class Home extends React.Component {
      * @param {Object} rep - la reponse du fetch
      * @return {Void}
      */
-    responseSendAndSupMsg(rep){
-        this.setState({loadImg: ""});
+    responseSendAndSupMsg(rep) {
+        this.setState({
+            loadImg: ""
+        });
         if (!rep.ok) {
-            console.log("Problem. Status Code: " +rep.status+"   rep:"+rep.statusText);
-            this.setState({errorImg: "https://http.cat/"+rep.status});
-            rep.json().then(data => {this.saveErrorMsg(data)});
+            console.log("Problem. Status Code: " + rep.status + "   rep:" + rep.statusText);
+            this.setState({
+                errorImg: "https://http.cat/" + rep.status
+            });
+            rep.json().then(data => {
+                this.saveErrorMsg(data)
+            });
             return;
-        }else{
+        } else {
             this.getMsg();
         }
     }
@@ -137,8 +153,10 @@ class Home extends React.Component {
      * @param  {type} msg
      * @return {Void}
      */
-    saveErrorMsg(msg){
-        this.setState({errorMsg: msg.error});
+    saveErrorMsg(msg) {
+        this.setState({
+            errorMsg: msg.error
+        });
     }
 
     //--------------------------------------------------------------------------
@@ -152,18 +170,24 @@ class Home extends React.Component {
      * @return {Void}
      */
     getMsg(event) {
-        if(event != null){
+        if (event != null) {
             event.preventDefault();
         }
-        this.setState({errorImg: ""});
-        this.setState({loadImg: "https://media.giphy.com/media/cMU9cCdDHTHJm/giphy.gif"});
+        this.setState({
+            errorImg: ""
+        });
+        this.setState({
+            loadImg: "https://media.giphy.com/media/cMU9cCdDHTHJm/giphy.gif"
+        });
         console.log("/u/timeline ");
         fetch("https://messy.now.sh/u/timeline", {
-            headers: {
-                "Authorization": "Bearer:"+this.props.dataUser.token
-            }
-        })
-        .then(rep =>{this.response(rep)});
+                headers: {
+                    "Authorization": "Bearer:" + this.props.dataUser.token
+                }
+            })
+            .then(rep => {
+                this.response(rep)
+            });
     }
 
     /**
@@ -172,34 +196,44 @@ class Home extends React.Component {
      * @param  {Object} event
      * @return {Void}
      */
-    sendMsg(event){
-        if(event != null){
+    sendMsg(event) {
+        if (event != null) {
             event.preventDefault();
         }
-        if(this.state.newMsg === ""){
-            this.setState({errorImg: "https://images.duckduckgo.com/iu/?u=http%3A%2F%2F31.media.tumblr.com%2Ftumblr_m9w2is2dVU1qh66wqo1_1280.jpg&f=1"});
-            this.setState({errorMsg: "msg vide"});
+        if (this.state.newMsg === "") {
+            this.setState({
+                errorImg: "https://images.duckduckgo.com/iu/?u=http%3A%2F%2F31.media.tumblr.com%2Ftumblr_m9w2is2dVU1qh66wqo1_1280.jpg&f=1"
+            });
+            this.setState({
+                errorMsg: "msg vide"
+            });
             return;
         }
-        this.setState({errorImg: ""});
-        this.setState({loadImg: "https://media.giphy.com/media/cMU9cCdDHTHJm/giphy.gif"});
+        this.setState({
+            errorImg: ""
+        });
+        this.setState({
+            loadImg: "https://media.giphy.com/media/cMU9cCdDHTHJm/giphy.gif"
+        });
         console.log("/u/timeline send");
         var msg = {
-            message:this.state.newMsg
+            message: this.state.newMsg
         };
         this.setState({
             newMsg: ""
         });
         var body = JSON.stringify(msg);
         fetch("https://messy.now.sh/u/timeline", {
-            method: "POST",
-            body: body,
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Bearer:"+this.props.dataUser.token
-            }
-        })
-        .then(rep =>{this.responseSendAndSupMsg(rep)});
+                method: "POST",
+                body: body,
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer:" + this.props.dataUser.token
+                }
+            })
+            .then(rep => {
+                this.responseSendAndSupMsg(rep)
+            });
     }
 
     /**
@@ -208,20 +242,26 @@ class Home extends React.Component {
      * @param  {Object} event
      * @return {Void}
      */
-    supMsg(event){
-        this.setState({errorImg: ""});
-        this.setState({loadImg: "https://media.giphy.com/media/cMU9cCdDHTHJm/giphy.gif"});
+    supMsg(event) {
+        this.setState({
+            errorImg: ""
+        });
+        this.setState({
+            loadImg: "https://media.giphy.com/media/cMU9cCdDHTHJm/giphy.gif"
+        });
         console.log("/u/timeline sup");
         var id = event.target.value;
         console.log(id);
-        fetch("https://messy.now.sh/u/timeline/"+id, {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Bearer:"+this.props.dataUser.token
-            }
-        })
-        .then(rep =>{this.responseSendAndSupMsg(rep)});
+        fetch("https://messy.now.sh/u/timeline/" + id, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer:" + this.props.dataUser.token
+                }
+            })
+            .then(rep => {
+                this.responseSendAndSupMsg(rep)
+            });
     }
 
     //--------------------------------------------------------------------------.

@@ -1,69 +1,69 @@
-*{
+* {
+    color: #9d9d9d;
     background-color: #222;
-    color: #9d9d9d
 }
 
-#form{
+#form {
     display: flex;
     flex-direction: row;
     justify-content: center;
 }
 
-#form form{
-    border: 1px solid #CECECE;
+#form form {
+    border: 1px solid #cecece;
 }
 
-#msg{
-    height: 500px;
+#msg {
     overflow: auto;
+    height: 500px;
     margin: auto;
-    border: 1px solid #CECECE;
+    border: 1px solid #cecece;
 }
 
-#msg_ul{
+#msg_ul {
     display: flex;
     flex-direction: column-reverse;
     justify-content: center;
-    padding-left: 0px;
     margin: auto;
-    border: 1px solid #CECECE;
-
+    padding-left: 0;
+    border: 1px solid #cecece;
 }
 
-ul{
+ul {
     list-style-type: none;
 }
 
 button,
-input[type="submit"],
-input[type="button"]{
-    border: 1px solid #0066cc;
-    background-color: #0099cc;
-    color: #ffffff;
+input[type='button'],
+input[type='submit'] {
     padding: 5px 10px;
+    color: #fff;
+    border: 1px solid #06c;
+    background-color: #09c;
 }
 
 button:hover,
-input[type="submit"]:hover,
-input[type="button"]:hover {
-    border: 1px solid #0099cc;
-    background-color: #00aacc;
-    color: #ffffff;
+input[type='button']:hover,
+input[type='submit']:hover {
     padding: 5px 10px;
+    color: #fff;
+    border: 1px solid #09c;
+    background-color: #0ac;
 }
 
 button:disabled,
 button[disabled],
-input[type="submit"]:disabled,
-input[type="button"]:disabled{
-    border: 1px solid #999999;
-    background-color: #cccccc;
-    color: #666666;
+input[type='button']:disabled,
+input[type='submit']:disabled {
+    color: #666;
+    border: 1px solid #999;
+    background-color: #ccc;
 }
 
-textarea, input{
-    margin: 0px;
+input,
+textarea {
+    margin: 0;
+    color: #e4e4e4;
     border: 1px solid #525252;
     background-color: #525252;
-    color: #e4e4e4;
 }

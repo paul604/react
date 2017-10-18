@@ -7,7 +7,7 @@ var ReactDOM = require("react-dom");
  * @param  {Object} props
  * @return {Object}
  */
-const VueHome = function (props){
+const VueHome = function (props) {
     return (
         <div>
             {props.errorImg != "" ?

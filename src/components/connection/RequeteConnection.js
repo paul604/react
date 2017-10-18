@@ -16,8 +16,15 @@ class RequeteConnection extends React.Component {
             errorImg: "",
             errorMsg: "",
             loadImg: "",
-            userCrea: {name: "", password: "", image: ""},
-            userCo: {name: "", password: ""}
+            userCrea: {
+                name: "",
+                password: "",
+                image: ""
+            },
+            userCo: {
+                name: "",
+                password: ""
+            }
         };
         this.updateUserCrea = this.updateUserCrea.bind(this);
         this.updateUserCo = this.updateUserCo.bind(this);
@@ -40,8 +47,9 @@ class RequeteConnection extends React.Component {
      */
     updateUserCrea(event) {
         var updatedU = Object.assign({},
-            this.state.userCrea,
-            { [event.target.name]: event.target.value }
+            this.state.userCrea, {
+                [event.target.name]: event.target.value
+            }
         );
         this.setState({
             userCrea: updatedU
@@ -56,8 +64,9 @@ class RequeteConnection extends React.Component {
      */
     updateUserCo(event) {
         var updatedU = Object.assign({},
-            this.state.userCo,
-            { [event.target.name]: event.target.value }
+            this.state.userCo, {
+                [event.target.name]: event.target.value
+            }
         );
         this.setState({
             userCo: updatedU
@@ -75,15 +84,23 @@ class RequeteConnection extends React.Component {
      * @param  {Object} rep - la response de creat et connection
      * @return {Void}
      */
-    response(rep){
-        this.setState({loadImg: ""});
+    response(rep) {
+        this.setState({
+            loadImg: ""
+        });
         if (!rep.ok) {
-          console.log("Problem. Status Code: " +rep.status+"   rep:"+rep.statusText);
-          this.setState({errorImg: "https://http.cat/"+rep.status});
-          rep.json().then(data => {this.saveErrorMsg(data)});
-          return;
+            console.log("Problem. Status Code: " + rep.status + "   rep:" + rep.statusText);
+            this.setState({
+                errorImg: "https://http.cat/" + rep.status
+            });
+            rep.json().then(data => {
+                this.saveErrorMsg(data)
+            });
+            return;
         }
-        rep.json().then(dataFun => {this.dataJson(dataFun)});
+        rep.json().then(dataFun => {
+            this.dataJson(dataFun)
+        });
     }
 
     /**
@@ -93,7 +110,7 @@ class RequeteConnection extends React.Component {
      * @param  {Object} data - data parsing
      * @return {Void}
      */
-    dataJson(data){
+    dataJson(data) {
         this.props.onConection(data);
     }
 
@@ -103,8 +120,10 @@ class RequeteConnection extends React.Component {
      * @param  {type} msg
      * @return {Void}
      */
-    saveErrorMsg(msg){
-        this.setState({errorMsg: msg.error});
+    saveErrorMsg(msg) {
+        this.setState({
+            errorMsg: msg.error
+        });
     }
 
     //--------------------------------------------------------------------------
@@ -119,18 +138,24 @@ class RequeteConnection extends React.Component {
      */
     creat(event) {
         event.preventDefault();
-        this.setState({errorImg: ""});
-        this.setState({loadImg: "https://media.giphy.com/media/cMU9cCdDHTHJm/giphy.gif"});
+        this.setState({
+            errorImg: ""
+        });
+        this.setState({
+            loadImg: "https://media.giphy.com/media/cMU9cCdDHTHJm/giphy.gif"
+        });
         var body = JSON.stringify(this.state.userCrea);
-        console.log("join "+body);
+        console.log("join " + body);
         fetch("https://messy.now.sh/join", {
-            method: "POST",
-            body: body,
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })
-        .then(rep =>{this.response(rep)});
+                method: "POST",
+                body: body,
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+            .then(rep => {
+                this.response(rep)
+            });
     }
 
     /**
@@ -139,20 +164,26 @@ class RequeteConnection extends React.Component {
      * @param  {Object} event
      * @return {Void}
      */
-    connection(event){
+    connection(event) {
         event.preventDefault();
-        this.setState({errorImg: ""});
-        this.setState({loadImg: "https://media.giphy.com/media/cMU9cCdDHTHJm/giphy.gif"});
+        this.setState({
+            errorImg: ""
+        });
+        this.setState({
+            loadImg: "https://media.giphy.com/media/cMU9cCdDHTHJm/giphy.gif"
+        });
         var body = JSON.stringify(this.state.userCo);
-        console.log("authenticate "+body);
+        console.log("authenticate " + body);
         fetch("https://messy.now.sh/authenticate", {
-            method: "POST",
-            body: body,
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })
-        .then(rep =>{this.response(rep)});
+                method: "POST",
+                body: body,
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+            .then(rep => {
+                this.response(rep)
+            });
     }
 
     //--------------------------------------------------------------------------.

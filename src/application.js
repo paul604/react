@@ -13,13 +13,10 @@ class Main extends React.Component {
     constructor(props) {
 
         super(props);
-        this.state = {
-
-        };
+        this.state = {};
         this.onConection = this.onConection.bind(this);
         this.onDeconection = this.onDeconection.bind(this);
     }
-
 
     /**
      * onConection - description
@@ -33,7 +30,7 @@ class Main extends React.Component {
      *
      * @return {Void}
      */
-    onConection(dataLog){
+    onConection(dataLog) {
         console.log(dataLog);
         sessionStorage.setItem("userId", dataLog.user.id);
         sessionStorage.setItem("token", dataLog.token);
@@ -46,7 +43,7 @@ class Main extends React.Component {
      *
      * @return {Void}
      */
-    onDeconection(){
+    onDeconection() {
         sessionStorage.clear();
         this.forceUpdate();
     }
@@ -57,10 +54,10 @@ class Main extends React.Component {
      * @return {React.Component}
      */
     render() {
-        if(sessionStorage.getItem("token") != null){
+        if (sessionStorage.getItem("token") != null) {
             var dataUser = {
-                    userId: sessionStorage.getItem("userId"),
-                    token: sessionStorage.getItem("token")
+                userId: sessionStorage.getItem("userId"),
+                token: sessionStorage.getItem("token")
             };
             return (<Home dataUser={dataUser} onDeconection={this.onDeconection}/>);
         }
@@ -70,6 +67,4 @@ class Main extends React.Component {
 }
 
 ReactDOM.render(
-  <Main />,
-  document.getElementById("main")
-);
+    <Main/>, document.getElementById("main"));
