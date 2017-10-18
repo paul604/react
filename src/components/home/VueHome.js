@@ -10,7 +10,7 @@ var ReactDOM = require("react-dom");
 const VueHome = function (props) {
     return (
         <div>
-            {props.errorImg != "" ?
+            {props.error != "" ?
                     <div>
                         <img src={props.errorImg} height="250" width="300"/>
                         <p>{props.errorMsg}</p>
@@ -24,7 +24,7 @@ const VueHome = function (props) {
             </h1>
             <div id="msg">
 
-                {props.loadImg != "" ?
+                {props.load != "" ?
                     <div>
                         <img src={props.loadImg}/>
                     </div>

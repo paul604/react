@@ -16,7 +16,8 @@ class Home extends React.Component {
             newMsg: "",
             errorImg: "",
             errorMsg: "",
-            loadImg: "",
+            error: false,
+            load: false,
             msg: new Array()
         };
         this.response = this.response.bind(this);
@@ -73,12 +74,13 @@ class Home extends React.Component {
      */
     response(rep) {
         this.setState({
-            loadImg: ""
+            load: false
         });
         if (!rep.ok) {
             console.log("Problem. Status Code: " + rep.status + "   rep:" + rep.statusText);
             this.setState({
-                errorImg: "https://http.cat/" + rep.status
+                errorImg: this.props.errorImgBase + rep.status,
+                error: true
             });
             rep.json().then(data => {
                 this.saveErrorMsg(data)
@@ -136,7 +138,8 @@ class Home extends React.Component {
         if (!rep.ok) {
             console.log("Problem. Status Code: " + rep.status + "   rep:" + rep.statusText);
             this.setState({
-                errorImg: "https://http.cat/" + rep.status
+                errorImg: this.props.errorImgBase + rep.status,
+                error: true
             });
             rep.json().then(data => {
                 this.saveErrorMsg(data)
@@ -174,10 +177,8 @@ class Home extends React.Component {
             event.preventDefault();
         }
         this.setState({
-            errorImg: ""
-        });
-        this.setState({
-            loadImg: "https://media.giphy.com/media/cMU9cCdDHTHJm/giphy.gif"
+            error: false,
+            load: true
         });
         console.log("/u/timeline ");
         fetch("https://messy.now.sh/u/timeline", {
@@ -202,24 +203,19 @@ class Home extends React.Component {
         }
         if (this.state.newMsg === "") {
             this.setState({
-                errorImg: "https://images.duckduckgo.com/iu/?u=http%3A%2F%2F31.media.tumblr.com%2Ftumblr_m9w2is2dVU1qh66wqo1_1280.jpg&f=1"
-            });
-            this.setState({
-                errorMsg: "msg vide"
+                errorImg: "https://images.duckduckgo.com/iu/?u=http%3A%2F%2F31.media.tumblr.com%2Ftumblr_m9w2is2dVU1qh66wqo1_1280.jpg&f=1",
+                errorMsg: "msg vide",
+                error: true
             });
             return;
         }
-        this.setState({
-            errorImg: ""
-        });
-        this.setState({
-            loadImg: "https://media.giphy.com/media/cMU9cCdDHTHJm/giphy.gif"
-        });
         console.log("/u/timeline send");
         var msg = {
             message: this.state.newMsg
         };
         this.setState({
+            error: false,
+            load: true,
             newMsg: ""
         });
         var body = JSON.stringify(msg);
@@ -244,10 +240,8 @@ class Home extends React.Component {
      */
     supMsg(event) {
         this.setState({
-            errorImg: ""
-        });
-        this.setState({
-            loadImg: "https://media.giphy.com/media/cMU9cCdDHTHJm/giphy.gif"
+            error: false,
+            load: true,
         });
         console.log("/u/timeline sup");
         var id = event.target.value;
@@ -276,8 +270,8 @@ class Home extends React.Component {
     render() {
         return (<VueHome errorImg={this.state.errorImg} errorMsg={this.state.errorMsg} newMsg={this.state.newMsg} msg={this.state.msg}
             getMsg={this.getMsg} sendMsg={this.sendMsg} updateUserCrea={this.updateUserCrea}
-            dataUser={this.props.dataUser} supMsg={this.supMsg} loadImg={this.state.loadImg}
-            deconection={this.deconection}/>);
+            dataUser={this.props.dataUser} supMsg={this.supMsg} loadImg={this.props.loadImg}
+            deconection={this.deconection} error={this.state.error} load={this.state.load}/>);
     }
 
 }

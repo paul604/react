@@ -10,17 +10,17 @@ var ReactDOM = require("react-dom");
 const VueConnection = function (props) {
     return (
         <div >
-            {props.errorImg != "" ?
+            {props.error ?
                     <div>
-                        <img src={props.errorImg} height="250" width="300"/>
+                        <img src={props.errorImg} alt="error" height="250" width="300"/>
                         <p>{props.errorMsg}</p>
                     </div>
                     :
                     <div></div>
             }
-            {props.loadImg != "" ?
+            {props.load != "" ?
                 <div>
-                    <img src={props.loadImg}/>
+                    <img src={props.loadImg} alt="load"/>
                 </div>
                 :
                 <div></div>

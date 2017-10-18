@@ -13,7 +13,10 @@ class Main extends React.Component {
     constructor(props) {
 
         super(props);
-        this.state = {};
+        this.state = {
+            errorImgBase: "https://http.cat/",
+            loadImg: "https://media.giphy.com/media/cMU9cCdDHTHJm/giphy.gif"
+        };
         this.onConection = this.onConection.bind(this);
         this.onDeconection = this.onDeconection.bind(this);
     }
@@ -59,9 +62,9 @@ class Main extends React.Component {
                 userId: sessionStorage.getItem("userId"),
                 token: sessionStorage.getItem("token")
             };
-            return (<Home dataUser={dataUser} onDeconection={this.onDeconection}/>);
+            return (<Home dataUser={dataUser} onDeconection={this.onDeconection} errorImgBase={this.state.errorImgBase} loadImg={this.state.loadImg}/>);
         }
-        return (<Connection onConection={this.onConection}/>);
+        return (<Connection onConection={this.onConection} errorImgBase={this.state.errorImgBase} loadImg={this.state.loadImg}/>);
     }
 
 }
