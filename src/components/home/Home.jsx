@@ -1,7 +1,7 @@
 var React = require("react");
 var ReactDOM = require("react-dom");
 
-var VueHome = require("./VueHome.js");
+var VueHome = require("./VueHome.jsx");
 
 class Home extends React.Component {
 

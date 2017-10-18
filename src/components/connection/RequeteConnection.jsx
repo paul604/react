@@ -1,7 +1,7 @@
 var React = require("react");
 var ReactDOM = require("react-dom");
 
-var VueConnection = require("./VueConnection.js");
+var VueConnection = require("./VueConnection.jsx");
 
 class RequeteConnection extends React.Component {
 
